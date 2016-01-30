@@ -1,0 +1,19 @@
+<% content_for :title do %>Your reserved seat was cancelled<% end %>
+
+<% content_for :content do %>
+Dear <%= @user.email %>,
+
+We are sorry, but unfortunatelly from administrative reasons was your seat from
+<%= @seat.schema.name %> in <%= @seat.y %> row with number <%= @seat.x %> cancelled.
+
+<% if @ticket.seats.size <= 0 %>
+And because there was no more reservation on your ticket, the whole ticket was deleted.
+<% end %>
+
+You can check you actual reservations on <a href="<%= tickets_url %>">this</a> page.
+
+
+This happened from the administrator's will. If you are not aware of this step, please consult it with the administrator.
+
+Regards
+<% end %>

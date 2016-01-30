@@ -1,0 +1,82 @@
+<% content_for :content do %>
+
+<div class="row">
+	<div class="col-lg-12 col-md-12 col-sm-12">
+
+		<h1>Akce</h1>
+
+		<ul class="list-group">
+		<% for schema in @schemas %>
+			<li class="list-group-item">
+				<%= link_to schema.name, schema %>
+			</li>
+		<% end %>
+		</ul>
+
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12 col-md-12 col-sm-12">
+
+		<h1>Váš přehled</h1>
+		<% if @orders.to_a.size > 0 %>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Akce</th>
+					<th>Počet</th>
+					<th>Cena</th>
+				</tr>
+			</thead>
+				<% for order in @orders %>
+					<tr>
+						<td>
+						<%= link_to order['name'], schema_path(order['id']) %>
+						</td>
+						<td><%= order['total'] %></td>
+						<td><%= order['price'] %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<% else %>
+			<p>Nemáte žádné záznamy</p>
+		<% end %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12 col-md-12 col-sm-12">
+
+		<h1>Vaše lístky</h1>
+		<% if @tickets.count > 0 %>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Akce</th>
+					<th>Počet</th>
+					<th>Cena</th>
+					<th>Odkaz</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% for ticket in @tickets %>
+					<tr>
+						<td>
+							<%= ticket.name %>
+						</td>
+						<td><%= ticket.seats.count %></td>
+						<td><%= ticket.seats.sum('price') %></td>
+						<td><%= link_to 'Odkaz', ticket_path(ticket) %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<% else %>
+			<p>Nemáte žádné lístky</p>
+		<% end %>
+	</div>
+</div>
+
+<% end %>

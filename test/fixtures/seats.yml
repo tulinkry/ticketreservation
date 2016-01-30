@@ -1,0 +1,18 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+<% (1..12).each do |y| %>
+  <% (1..23).each do |x| %>
+seat_<%= x %>_<%= y %>:
+  x: <%= x %>
+  y: <%= y %>
+  schema: divadlo
+  state: <%= Seat::AVAILABLE %>
+  price: 100
+  <% end %>
+<% end %>
+
+seat_for_koncert:
+  x: 1
+  y: 1
+  schema: koncert
+  state: <%= Seat::AVAILABLE %>
+  price: 1000

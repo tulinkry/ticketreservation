@@ -1,0 +1,78 @@
+<% content_for :content do %>
+
+<h1><%= @schema.name %></h1>
+
+<table class="table table-striped">
+	<tr>
+		<th></th>
+	<% for col in (1..@schema.x) %>
+		<th> <%= col %> </th>
+	<% end %>
+	</tr>
+	<% @schema.seat_map.each_with_index do |row, i| %>
+		<tr>
+		<th><%= i + 1 %></th>
+		<% for seat in row %>
+			<td class="
+				<% if @virtual_ticket.seats.include?(seat) %>
+					warning
+				<% elsif @current_user_seats.include?(seat) %>
+					info
+				<% elsif seat.reserved? %>
+					danger
+				<% elsif seat.available? %>
+					success
+				<% end %>
+				">
+				<% if seat.available? %>
+					<%= link_to seat.price, virtual_ticket_add_seat_path(seat), :method => :post %>
+				<% else %>
+					<%= seat.price %>
+				<% end %>
+			</td>			
+		<% end %>
+		</tr>
+	<% end %>
+</table>
+
+<table class="table">
+	<tbody>
+		<tr>
+			<td class="warning">Vybrané</td>
+			<td class="info">Mnou rezervované</td>
+			<td class="danger">Rezervované</td>
+			<td class="success">Volné</td>
+			<td class="">Neexistující</td>
+		</tr>
+	</tbody>
+</table>
+
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Volno</th>
+			<td><%= @schema.seats.where('state = ?', Seat::AVAILABLE).count %></td>
+			<td><%= @schema.seats.where('state = ?', Seat::AVAILABLE).count * 100 / @schema.capacity %>%</td>
+		</tr>
+		<tr>
+			<th>Obsazeno</th>
+			<td><%= @schema.seats.where('state = ?', Seat::RESERVED).count %></td>
+			<td><%= @schema.seats.where('state = ?', Seat::RESERVED).count * 100 / @schema.capacity %>%</td>
+		</tr>
+		<tr>
+			<th>Kapacita</th>
+			<td><%= @schema.capacity %></td>
+			<td><%= @schema.capacity * 100 / @schema.capacity %>%</td>
+		</tr>
+		<tr>
+			<th>Maximální počet lístků na osobu</th>
+			<td><%= @schema.constraint %></td>
+			<td></td>
+		</tr>		
+	</tbody>
+</table>					
+
+
+<%= link_to 'Zpět', schemas_path, :class => 'btn btn-info' %>
+
+<% end %>

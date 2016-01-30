@@ -1,0 +1,26 @@
+<% content_for :content do %>
+
+<h1><%= @ticket.name %></h1>
+
+<% if @ticket.seats.size > 0 %>
+	<p><%= @ticket.name %></p>
+	<ul class="list-group">
+		<% for seat in @ticket.seats %>
+			<li class="list-group-item clearfix">
+				<span class="col-sm-8">
+					Sedadlo: řada <%= seat.y %>, sedadlo <%= seat.x %>
+				</span>
+					<%= link_to 'Vyřadit', ticket_seat_path(@ticket, seat),
+					:method => :delete,
+					'data-confirm' => "Jste si jistí? Vaše místo může mezitím zabrat jiný zájemce.",
+					:class => 'btn btn-xs btn-danger col-sm-4' %>
+			</li>
+		<% end %>
+	</ul>
+<% else %>
+	<h4>Zatím žádný výběr</h4>
+<% end %>	
+
+<%= link_to 'Back', tickets_path %>
+
+<% end %>

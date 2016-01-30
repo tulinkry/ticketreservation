@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TicketReservation</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <%= link_to('Domů', '/', { :class => 'navbar-brand' }) %>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <%= link_to('Administrace', admin_path) %>
+                    </li>
+                    <li>
+                        <%= link_to('Odhlásit', destroy_user_session_path, :method => :delete) %>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+<div class="container">
+
+	<div class="row">
+        <% if notice %>
+        <div class="col-lg-12">
+            <div class="alert alert-info">
+                <%= notice %>
+            </div>
+        </div>
+        <% end %>
+        <% if alert %>
+        <div class="col-lg-12">
+            <div class="alert alert-danger">
+                <%= alert %>
+            </div>
+        </div>
+        <% end %>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-8 col-md-8 col-sm-12">
+			<%= yield :content %>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-12">
+			<h3>Váš výběr</h3>
+			<% if @virtual_ticket.seats.size > 0 %>
+				<p><%= @virtual_ticket.seats.first.schema.name %></p>
+				<ul class="list-group">
+					<% for seat in @virtual_ticket.seats %>
+						<li class="list-group-item clearfix">
+							<span class="col-sm-8">
+								Sedadlo: řada <%= seat.y %>, sedadlo <%= seat.x %>
+							</span>
+							<%= link_to 'Vyřadit', virtual_ticket_delete_seat_path(seat),
+									:method => :delete, 
+									:class => 'btn btn-xs  btn-danger col-sm-4' %>
+						</li>
+					<% end %>
+					<% if @virtual_ticket.seats.size > 0 %>
+						<li class="list-group-item">
+						<%= link_to "Uzavřít", virtual_ticket_close_path, :method => :post, :class => 'btn btn-success' %>
+						</li>
+					<% end %>
+				</ul>
+			<% else %>
+				<h4>Zatím žádný výběr</h4>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-12 col-md-12">
+			By Kryštof
+		</div>
+	</div>
+
+</div>
+
+</body>
+</html>

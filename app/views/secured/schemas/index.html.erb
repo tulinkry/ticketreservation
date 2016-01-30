@@ -1,0 +1,23 @@
+<% content_for :content do %>
+
+  <h1>Akce</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @schemas.each do |schema| %>
+        <tr>
+          <td><%= link_to schema.name, schema %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+<% end %>

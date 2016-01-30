@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+divadlo:
+  name: '2015 - Divadlo'
+  capacity: <%= 12*23 %>
+  constraint: 20
+  x: 23
+  y: 12
+
+koncert:
+  name: '2016 - Koncert'
+  capacity: 1
+  constraint: 20
+  x: 1
+  y: 1

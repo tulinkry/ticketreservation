@@ -1,0 +1,32 @@
+<%= form_for [:admin, @schema] do |f| %>
+  <% if @schema.errors.any? %>
+    <div id="error_explanation" class="form_errors alert">
+      <h2><%= pluralize(@schema.errors.count, "error") %> prohibited this schema from being saved:</h2>
+
+      <ul class="list-group">
+      <% @schema.errors.full_messages.each do |message| %>
+        <li class="list-group-item text-danger"><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label_tag(:name, "Název:") %>
+    <%= f.text_field :name, { :class => 'form-control', :placeholder => '2016 - Koncert' } %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag(:constraint, "Maximální počet lístků na osobu:") %>
+    <%= f.text_field :constraint, { :class => 'form-control', :placeholder => '20' } %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag(:file, "Ze souboru:") %>
+    <%= f.file_field :file %>
+  </div>
+
+  <div class="form-group actions">
+    <%= f.submit "Vložit", { :class => 'btn btn-primary' } %>
+  </div>
+<% end %>

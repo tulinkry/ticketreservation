@@ -1,0 +1,9 @@
+<% content_for :title do %>Welcome<% end %>
+
+<% content_for :content do %>
+Dear <%= @user.email %>,
+
+welcome to Ticket reservations. You can continue at <a href="<%= home_url %>">this</a> page.
+
+Regards
+<% end %>

@@ -1,0 +1,27 @@
+<% content_for :content do %>
+
+  <h1>Akce</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @schemas.each do |schema| %>
+        <tr>
+          <td><%= link_to schema.name, admin_schema_path(schema) %></td>
+          <td><%= link_to 'Editovat', edit_admin_schema_path(schema), :class => 'btn btn-warning btn-xs' %></td>
+          <td><%= link_to 'Smazat', admin_schema_path(schema), method: :delete, data: { confirm: 'Jste si jistý? Tato akce smaže všechna sedadla a uživatelské lístky k tomuto schématu.' }, :class => 'btn btn-danger btn-xs' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'Nové', new_admin_schema_path, { :class => 'btn btn-success'} %>
+
+<% end %>

@@ -1,0 +1,10 @@
+<% content_for :title do %>Your reservation <%= @ticket.id %> was cancelled<% end %>
+
+<% content_for :content do %>
+Dear <%= @user.email %>,
+
+the organizator has not received your payment for the reservation during the given period
+and therefore your reservation was cancelled and your seats has become available for others.
+
+Regards
+<% end %>

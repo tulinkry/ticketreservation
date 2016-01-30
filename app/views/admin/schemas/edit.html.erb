@@ -1,0 +1,10 @@
+<% content_for :content do %>
+
+	<h1>Editace <%= @schema.name %></h1>
+
+	<%= render 'form' %>
+
+	<%= link_to @schema.name, admin_schema_path(@schema), :class => 'btn btn-info' %> |
+	<%= link_to 'Zpět', admin_schemas_path,  :class => 'btn btn-info' %>
+
+<% end %>

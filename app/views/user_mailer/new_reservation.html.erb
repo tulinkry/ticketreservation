@@ -1,0 +1,14 @@
+<% content_for :title do %>Your reservation <%= @ticket.id %><% end %>
+
+<% content_for :content do %>
+Dear <%= @user.email %>,
+
+your reservation was successfully updated in our system. From now on you have 7 days
+until <%= @ticket.created_at + 7.day %> to pay the amount of <%= @ticket.seats.reduce(0) { |a, e| a + e.price } %> CZK
+to the organizator. Upon your payment, the organizator will confirm your reservation in the system and it will 
+become permanent.
+
+Important: If you do not pay in the given period, your reservation will be cancelled.
+
+Regards
+<% end %>

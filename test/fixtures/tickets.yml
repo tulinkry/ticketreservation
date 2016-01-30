@@ -1,0 +1,5 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+user:
+  name: 'Divadlo 2015'
+  user: user
+  seats: seat_1_1, seat_2_2, seat_3_3, seat_4_4
