@@ -9,11 +9,12 @@ class Ticket < ActiveRecord::Base
 
 
   def self.check_older_than(day_count)
+    puts day_count
     begin
       Ticket.transaction do
         tickets = Ticket.where('created_at < ? AND confirmed = 0', DateTime.now - day_count)
         tickets.each do |ticket|
-          UserMailer.timeout_email(ticket.user, ticket).deliver_now
+          ::UserMailer.timeout_email(ticket.user, ticket).deliver_now
           ticket.destroy!
         end
       end

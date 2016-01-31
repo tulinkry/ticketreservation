@@ -1,0 +1,7 @@
+export ENV=production
+export RAILS_ENV=production
+export OPENSHIFT_APP_NAME=tickets
+export OPENSHIFT_MYSQL_DB_USERNAME=admin8w7gMhk
+export OPENSHIFT_MYSQL_DB_PASSWORD=SBMfqz1ueqwl
+export OPENSHIFT_MYSQL_DB_HOST=127.3.204.130
+export OPENSHIFT_MYSQL_DB_PORT=3306

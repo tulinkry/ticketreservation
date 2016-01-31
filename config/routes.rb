@@ -48,7 +48,6 @@ Rails.application.routes.draw do
 
   scope module: 'front' do
     get 'welcome/index', controller: 'welcome', action: :index, as: 'login'
-    get 'cron/update', controller: 'cron', action: 'update', as: 'reservation_timeout'
   end
   
   devise_for :users

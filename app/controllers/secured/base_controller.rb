@@ -24,6 +24,8 @@ class Secured::BaseController < Front::BaseController
       redirect_to(schema_path(@virtual_ticket.seats.first.schema)) && return
     end
 
+    schema = @virtual_ticket.seats.first.schema
+
     begin
       ::Ticket.transaction do
         @virtual_ticket.seats.each do |s|
@@ -33,12 +35,13 @@ class Secured::BaseController < Front::BaseController
 
         @virtual_ticket.save!
       end
-  	  UserMailer.new_reservation(current_user, @virtual_ticket).deliver_now
-  	  session['seats'] = []
-  	  redirect_to tickets_path, :notice => 'Ticket saved!'
+      UserMailer.new_reservation(current_user, @virtual_ticket).deliver_now
+      session['seats'] = []
+      redirect_to tickets_path, :notice => 'Ticket saved!'
     rescue Exception => e
+  raise e
       flash[:alert] = 'Process failed while it was saving the data, try to repeat the action or contact administrator!'
-      redirect_to(schema_path(params[:id])) && return
+      redirect_to(schema_path(schema)) && return
     end
 
 
